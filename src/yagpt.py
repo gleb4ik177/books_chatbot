@@ -2,10 +2,11 @@ import requests
 import sys
 import re
 sys.path.append("../")
+from config import catalog_id, apikey
 from src.postgres import value_of_attribute,authors_by_book_id
 def response(query):
     prompt = {
-        "modelUri": "gpt://b1gregr882dru17cfcde/yandexgpt",
+        "modelUri": f"gpt://{catalog_id}/yandexgpt",
         "completionOptions": {
             "stream": False,
             "temperature": 0.2,
@@ -35,7 +36,7 @@ def response(query):
     url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Api-Key AQVNwPTRvLl1KkNnp_Un3V5EPKNNIENfQti3Yx5P"
+        "Authorization": f"Api-Key {apikey}"
     }
     response = requests.post(url, headers=headers, json=prompt)
     result = response.json()['result']['alternatives'][0]['message']['text']

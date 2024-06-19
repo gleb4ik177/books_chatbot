@@ -1,11 +1,13 @@
 import psycopg2
-
+import sys
+sys.path.append("../")
+from config import host, database, user, password
 def connect():
     conn = psycopg2.connect(
-    host="your host",
-    database="your db",
-    user="your user",
-    password="your password"
+    host=host,
+    database=database,
+    user=user,
+    password=password
     )
     return conn
 
